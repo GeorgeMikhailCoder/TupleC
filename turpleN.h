@@ -29,29 +29,16 @@ struct TupleType :
             difficult.goToItem<Types ...>(index-1);
     }
 
-
-    template<int k>
-    void some()
+    void* operator [](int index)
     {
-        return k;
-    }
-
-    
-    
-
-    template<int k>
-    type1 operator [](int )
-    {
-        if (k == N)
-            return single;
+        if (index == N)
+            return &single;
+        else
+            return difficult[index];
     }
 
 
-    //  template<int index>
-    //  type1 operator [](int )
-    //  {
-    //          return single;
-    //  }
+
 };
 
 template<typename type1>
@@ -66,9 +53,9 @@ struct TupleType<0, type1> {
 
 
 
-    type1 operator [](int )
+    void * operator [](int )
     {
-        return single;
+        return &single;
     }
     
 
