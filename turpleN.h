@@ -1,4 +1,7 @@
 #include <vector>
+#include<string>
+
+using namespace std;
 
 template <
     int N,
@@ -6,7 +9,7 @@ template <
     typename ... Types
 >
 struct TupleType :
-    TupleType <N-1, Types...>
+    TupleType <N - 1, Types...>
 {
     using type1 = T;
     using type2 = TupleType<N - 1, Types...>;
@@ -20,19 +23,20 @@ struct TupleType :
         single = arg;
     };
 
-    template<class T, class ... Types>
-    T goToItem(int index)
-    {
-        if (index == N)
-            return single;
-        else
-            difficult.goToItem<Types ...>(index-1);
+    template<class S>
+    S get(int index){
+        if (index == 0)
+            return static_cast<S>(&single);
+        else difficult.get<S>(index-1);
+    
     }
 
     void* operator [](int index)
     {
         if (index == N)
+        {
             return &single;
+        }
         else
             return difficult[index];
     }
@@ -51,9 +55,14 @@ struct TupleType<0, type1> {
         single = a;
     }
 
+    template<class S>
+    S get(int index) {
+        if (index == 0)
+            return static_cast<S>(&single);
+    }
 
 
-    void * operator [](int )
+    void* operator [](int )
     {
         return &single;
     }

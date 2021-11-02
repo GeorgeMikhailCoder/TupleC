@@ -12,8 +12,10 @@ int main()
 	a.single = 0.1;
 	a.difficult.single = 7;
 	a.difficult.difficult.single = "qwe";
-	void * x = a[1];
-	cout << *((int*)x) << endl;
+	
+	void* x = a[1];
+	cout<<*((int*)x)<<endl;
+
 	system("pause");
 	return 0;
 }
