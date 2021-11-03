@@ -16,6 +16,12 @@ int main()
 	void* x = a[1];
 	cout<<*((int*)x)<<endl;
 
+	int x2 = a.get<int>(1);
+	cout << x2 << endl;
+
+	int x3 = a.operator[]<int>(1);
+	cout << x3 << endl;
+
 	system("pause");
 	return 0;
 }

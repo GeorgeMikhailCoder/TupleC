@@ -25,20 +25,37 @@ struct TupleType :
 
     template<class S>
     S get(int index){
-        if (index == 0)
-            return static_cast<S>(&single);
-        else difficult.get<S>(index-1);
+        return *(S*) this->voidGet(index);
     
     }
 
-    void* operator [](int index)
+    void* voidGet(int index)
     {
         if (index == N)
         {
             return &single;
         }
         else
-            return difficult[index];
+            return difficult.voidGet(index);
+    }
+
+    void* operator[](int index)
+    {
+        if (index == N)
+        {
+            return &single;
+        }
+        else
+            return difficult.operator[](index);
+    }
+
+
+    template<class S>
+    S operator [](int index)
+    {
+        S* tmp = new S();
+        *tmp = get<S>(index);
+        return *tmp;
     }
 
 
@@ -61,12 +78,23 @@ struct TupleType<0, type1> {
             return static_cast<S>(&single);
     }
 
+    void* voidGet(int)
+    {
+        return &single;
+    }
 
     void* operator [](int )
     {
         return &single;
     }
     
+    template<class S>
+    S operator [](int index)
+    {
+        S* tmp = new S();
+        *tmp = get<S>(index);
+        return *tmp;
+    }
 
 };
 
